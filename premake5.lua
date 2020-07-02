@@ -1,7 +1,7 @@
 workspace "JLHE"
 	architecture "x64"
 
-	startproject "JLHE-Arcade"
+	startproject "Sandbox"
 
 	configurations {
 		"Debug",
@@ -109,6 +109,7 @@ project "Sandbox"
 			"JLHE/src",
 			"JLHE/vendor/spdlog/include",
 			"JLHE/vendor",
+			"Sandbox/src",
 			"%{IncludeDir.glm}"
 		}
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Arcade">
+      <UniqueIdentifier>{8532C5A7-71D4-EF7D-5A8F-03D246D076CE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arcade\SpaceInvaders">
+      <UniqueIdentifier>{BC0214C5-A891-9D8E-51B0-B1893D1EAE34}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Arcade\Game.h">
+      <Filter>Arcade</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Arcade\Mode.h">
+      <Filter>Arcade</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Arcade\SpaceInvaders\SpaceInvadersGame.h">
+      <Filter>Arcade\SpaceInvaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLayer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Arcade\SpaceInvaders\SpaceInvadersGame.cpp">
+      <Filter>Arcade\SpaceInvaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameLayer.cpp" />
+    <ClCompile Include="src\SandboxApp.cpp" />
+  </ItemGroup>
+</Project>

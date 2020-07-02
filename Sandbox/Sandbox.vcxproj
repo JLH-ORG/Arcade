@@ -79,7 +79,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>JLHE_PLATFORM_WINDOWS;JLHE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\JLHE\src;..\JLHE\vendor\spdlog\include;..\JLHE\vendor;..\JLHE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\JLHE\src;..\JLHE\vendor\spdlog\include;..\JLHE\vendor;src;..\JLHE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -95,7 +95,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>JLHE_PLATFORM_WINDOWS;JLHE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\JLHE\src;..\JLHE\vendor\spdlog\include;..\JLHE\vendor;..\JLHE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\JLHE\src;..\JLHE\vendor\spdlog\include;..\JLHE\vendor;src;..\JLHE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -115,7 +115,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>JLHE_PLATFORM_WINDOWS;JLHE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\JLHE\src;..\JLHE\vendor\spdlog\include;..\JLHE\vendor;..\JLHE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\JLHE\src;..\JLHE\vendor\spdlog\include;..\JLHE\vendor;src;..\JLHE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -131,9 +131,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Arcade\Game.h" />
+    <ClInclude Include="src\Arcade\Mode.h" />
+    <ClInclude Include="src\Arcade\SpaceInvaders\SpaceInvadersGame.h" />
     <ClInclude Include="src\GameLayer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Arcade\SpaceInvaders\SpaceInvadersGame.cpp" />
     <ClCompile Include="src\GameLayer.cpp" />
     <ClCompile Include="src\SandboxApp.cpp" />
   </ItemGroup>

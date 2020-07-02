@@ -2,6 +2,8 @@
 
 #include <JLHE.h>
 
+#include "Arcade/Game.h"
+
 namespace Arcade {
 
 	class GameLayer : public JLHE::Layer {
@@ -16,6 +18,7 @@ namespace Arcade {
 		virtual void OnImGuiRender() override;
 		void OnEvent(JLHE::Event& e) override;
 	private:
+		Arcade::Game* m_Game;
 		JLHE::OrthographicCameraController m_CameraController;
 	};
 
