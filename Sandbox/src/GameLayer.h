@@ -18,7 +18,8 @@ namespace Arcade {
 		virtual void OnImGuiRender() override;
 		void OnEvent(JLHE::Event& e) override;
 	private:
-		Arcade::Game* m_Game;
+		JLHE::Ref<Arcade::Game> m_Game;
+	private:
 		JLHE::OrthographicCameraController m_CameraController;
 	};
 

@@ -2,7 +2,7 @@
 
 namespace Arcade {
 
-	enum Mode {
+	enum class Mode {
 		SpaceInvaders = 0
 	};
 
