@@ -12,7 +12,7 @@ namespace Arcade {
 
 	void GameLayer::OnAttach() {
 		JLHE_PROFILE_FUNCTION();
-
+		m_Game = Game::Create();
 	}
 
 	void GameLayer::OnDetach() {
@@ -29,7 +29,9 @@ namespace Arcade {
 		JLHE::RenderCommand::Clear();
 
 		// Render here --->
-
+		JLHE::Renderer2D::BeginScene(m_CameraController.GetCamera());
+		m_Game->Render();
+		JLHE::Renderer2D::EndScene();
 		// ----------------
 
 	}

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "JLHE.h"
 #include "Arcade/Mode.h"
 
 namespace Arcade {
@@ -7,8 +8,12 @@ namespace Arcade {
 	class Game {
 	public:
 		virtual void Render() const = 0;
+
+		static JLHE::Ref<Game> Create();
 	public:
-		Mode GameMode;
+
+		//should not be const
+		static const Mode GameMode = Mode::SpaceInvaders;
 	};
 
 }

@@ -21,6 +21,9 @@
     <ClInclude Include="src\GameLayer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Arcade\Game.cpp">
+      <Filter>Arcade</Filter>
+    </ClCompile>
     <ClCompile Include="src\Arcade\SpaceInvaders\SpaceInvadersGame.cpp">
       <Filter>Arcade\SpaceInvaders</Filter>
     </ClCompile>

@@ -21,7 +21,11 @@ namespace JLHE {
 	}
 
 	void Entity::OnRender() {
-		if(m_Visible)
-			Renderer2D::DrawRotatedQuad(m_Position, m_Size, m_Rotation, m_SubTexture);
+		if (m_Visible) {
+			if (m_SubTexture)
+				Renderer2D::DrawRotatedQuad(m_Position, m_Size, m_Rotation, m_SubTexture);
+			else
+				Renderer2D::DrawRotatedQuad(m_Position, m_Size, m_Rotation, { 1, 1, 1, 1 });
+		}
 	}
 }

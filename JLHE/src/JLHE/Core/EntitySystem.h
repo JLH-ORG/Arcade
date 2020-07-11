@@ -18,6 +18,6 @@ namespace JLHE {
 		bool AddEntity(Entity& entity);
 	private:
 		std::vector<Entity> m_Entities;
-		static const uint32_t s_MaxEntities = 1000;
+		static const uint32_t s_MaxEntities = 100;
 	};
 }
