@@ -7,25 +7,31 @@ namespace JLHE {
 		m_Entities.reserve(s_MaxEntities);
 	}
 
+	EntitySystem::~EntitySystem() {
+		for (auto& entity : m_Entities) {
+			delete entity;
+		}
+	}
+
 	void EntitySystem::OnUpdate(Timestep& ts) {
 		for (auto& entity : m_Entities) {
-			entity.OnUpdate(ts);
+			entity->OnUpdate(ts);
 		}
 	}
 
 	void EntitySystem::OnEvent(Event& e) {
 		for (auto& entity : m_Entities) {
-			entity.OnEvent(e);
+			entity->OnEvent(e);
 		}
 	}
 
 	void EntitySystem::OnRender() {
 		for (auto& entity : m_Entities) {
-			entity.OnRender();
+			entity->OnRender();
 		}
 	}
 
-	bool EntitySystem::AddEntity(Entity& entity) {
+	bool EntitySystem::AddEntity(Entity* entity) {
 		if (m_Entities.size() < s_MaxEntities) {
 			m_Entities.push_back(entity);
 			return true;

@@ -24,6 +24,7 @@ namespace Arcade {
 
 		JLHE::Renderer2D::ResetStats();
 		m_CameraController.OnUpdate(ts);
+		m_Game->Update(ts);
 
 		JLHE::RenderCommand::SetClearColour({ 1.0f, 0.1f, 0.1f, 1.0f });
 		JLHE::RenderCommand::Clear();

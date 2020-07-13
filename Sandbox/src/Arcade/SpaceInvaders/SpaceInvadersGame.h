@@ -10,6 +10,7 @@ namespace Arcade {
 		SpaceInvadersGame();
 
 		virtual void Render() const override;
+		virtual void Update(JLHE::Timestep& ts) override;
 
 	private:
 		//why do I need mutable?

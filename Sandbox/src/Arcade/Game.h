@@ -8,6 +8,7 @@ namespace Arcade {
 	class Game {
 	public:
 		virtual void Render() const = 0;
+		virtual void Update(JLHE::Timestep& ts) = 0;
 
 		static JLHE::Ref<Game> Create();
 	public:

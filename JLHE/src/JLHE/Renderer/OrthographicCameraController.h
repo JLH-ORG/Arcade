@@ -9,7 +9,7 @@ namespace JLHE {
 
 	class OrthographicCameraController {
 	public:
-		OrthographicCameraController(float aspectRatio, bool rotation = false);
+		OrthographicCameraController(float aspectRatio, bool movable = true, bool rotation = false);
 
 		void OnUpdate(Timestep ts);
 		void OnEvent(Event& e);
@@ -30,6 +30,7 @@ namespace JLHE {
 		float m_ZoomLevel = 1.0f;
 		OrthographicCamera m_Camera;
 
+		bool m_Movable = true;
 		bool m_Rotation = false;
 
 		glm::vec3 m_CameraPosition = { 0.0f, 0.0f, 0.0f };

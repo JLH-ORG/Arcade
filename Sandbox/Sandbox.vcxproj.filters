@@ -7,6 +7,9 @@
     <Filter Include="Arcade\SpaceInvaders">
       <UniqueIdentifier>{BC0214C5-A891-9D8E-51B0-B1893D1EAE34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arcade\SpaceInvaders\Entities">
+      <UniqueIdentifier>{F0EED902-5C07-C12C-25B4-50C6918B55C6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Arcade\Game.h">
@@ -14,6 +17,9 @@
     </ClInclude>
     <ClInclude Include="src\Arcade\Mode.h">
       <Filter>Arcade</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Arcade\SpaceInvaders\Entities\Player.h">
+      <Filter>Arcade\SpaceInvaders\Entities</Filter>
     </ClInclude>
     <ClInclude Include="src\Arcade\SpaceInvaders\SpaceInvadersGame.h">
       <Filter>Arcade\SpaceInvaders</Filter>
@@ -23,6 +29,9 @@
   <ItemGroup>
     <ClCompile Include="src\Arcade\Game.cpp">
       <Filter>Arcade</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Arcade\SpaceInvaders\Entities\Player.cpp">
+      <Filter>Arcade\SpaceInvaders\Entities</Filter>
     </ClCompile>
     <ClCompile Include="src\Arcade\SpaceInvaders\SpaceInvadersGame.cpp">
       <Filter>Arcade\SpaceInvaders</Filter>

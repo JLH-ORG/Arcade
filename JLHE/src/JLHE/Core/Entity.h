@@ -14,9 +14,9 @@ namespace JLHE {
 		Entity(Ref<SubTexture2D>& subTexture, glm::vec3 position, glm::vec2 size, float rotation);
 		virtual ~Entity() = default;
 
-		void OnUpdate(Timestep& ts);
-		void OnEvent(Event& e);
-		void OnRender();
+		virtual void OnUpdate(Timestep& ts);
+		virtual void OnEvent(Event& e);
+		virtual void OnRender();
 
 		void SetSubTexture(const Ref<SubTexture2D>& subTexture) { m_SubTexture = subTexture; }
 
