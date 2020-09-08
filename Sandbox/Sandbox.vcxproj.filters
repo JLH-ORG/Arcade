@@ -25,6 +25,7 @@
       <Filter>Arcade\SpaceInvaders</Filter>
     </ClInclude>
     <ClInclude Include="src\GameLayer.h" />
+    <ClInclude Include="src\Arcade\SpaceInvaders\Entities\Alien.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Arcade\Game.cpp">
@@ -38,5 +39,6 @@
     </ClCompile>
     <ClCompile Include="src\GameLayer.cpp" />
     <ClCompile Include="src\SandboxApp.cpp" />
+    <ClCompile Include="src\Arcade\SpaceInvaders\Entities\Alien.cpp" />
   </ItemGroup>
 </Project>

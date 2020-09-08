@@ -133,12 +133,14 @@
   <ItemGroup>
     <ClInclude Include="src\Arcade\Game.h" />
     <ClInclude Include="src\Arcade\Mode.h" />
+    <ClInclude Include="src\Arcade\SpaceInvaders\Entities\Alien.h" />
     <ClInclude Include="src\Arcade\SpaceInvaders\Entities\Player.h" />
     <ClInclude Include="src\Arcade\SpaceInvaders\SpaceInvadersGame.h" />
     <ClInclude Include="src\GameLayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Arcade\Game.cpp" />
+    <ClCompile Include="src\Arcade\SpaceInvaders\Entities\Alien.cpp" />
     <ClCompile Include="src\Arcade\SpaceInvaders\Entities\Player.cpp" />
     <ClCompile Include="src\Arcade\SpaceInvaders\SpaceInvadersGame.cpp" />
     <ClCompile Include="src\GameLayer.cpp" />
@@ -152,4 +154,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-</Project> 
+</Project>
