@@ -9,4 +9,5 @@ namespace Arcade {
 			case Mode::SpaceInvaders: return JLHE::CreateRef<SpaceInvadersGame>();
 		}
 	}
+
 }

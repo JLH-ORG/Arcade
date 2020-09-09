@@ -1,6 +1,8 @@
 #include "Alien.h"
+#include "Arcade/SpaceInvaders/SpaceInvadersGame.h"
 
 namespace Arcade {
+
 	bool Alien::s_MovingRight = true;
 	float Alien::s_Bound = 1.0f;
 
@@ -8,17 +10,16 @@ namespace Arcade {
 		: JLHE::Entity(position, size, 0), m_Speed(speed), m_IsDead(false) {}
 
 	void Alien::OnUpdate(JLHE::Timestep& ts) {
+
 		if (Alien::s_MovingRight) {
 			m_Position.x += ts * m_Speed;
-			if (m_Position.x > Alien::s_Bound)
-				Alien::s_MovingRight = false;
+			if (m_Position.x > Alien::s_Bound) { SpaceInvadersGame::s_ChangeDirections = true; }
 		}
-		else
-		{
+		else {
 			m_Position.x -= ts * m_Speed;
-			if (m_Position.x < Alien::s_Bound)
-				Alien::s_MovingRight = true;
+			if (m_Position.x < -Alien::s_Bound) { SpaceInvadersGame::s_ChangeDirections = true; }
 		}
+
 	}
 
 	void Alien::Die() {
@@ -29,7 +30,5 @@ namespace Arcade {
 		return false;
 	}
 
-	void Alien::Move() {
-		
-	}
+
 }

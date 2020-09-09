@@ -134,6 +134,7 @@
     <ClInclude Include="src\Arcade\Game.h" />
     <ClInclude Include="src\Arcade\Mode.h" />
     <ClInclude Include="src\Arcade\SpaceInvaders\Entities\Alien.h" />
+    <ClInclude Include="src\Arcade\SpaceInvaders\Entities\Bullet.h" />
     <ClInclude Include="src\Arcade\SpaceInvaders\Entities\Player.h" />
     <ClInclude Include="src\Arcade\SpaceInvaders\SpaceInvadersGame.h" />
     <ClInclude Include="src\GameLayer.h" />
@@ -141,6 +142,7 @@
   <ItemGroup>
     <ClCompile Include="src\Arcade\Game.cpp" />
     <ClCompile Include="src\Arcade\SpaceInvaders\Entities\Alien.cpp" />
+    <ClCompile Include="src\Arcade\SpaceInvaders\Entities\Bullet.cpp" />
     <ClCompile Include="src\Arcade\SpaceInvaders\Entities\Player.cpp" />
     <ClCompile Include="src\Arcade\SpaceInvaders\SpaceInvadersGame.cpp" />
     <ClCompile Include="src\GameLayer.cpp" />
