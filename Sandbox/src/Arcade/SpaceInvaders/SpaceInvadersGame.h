@@ -5,6 +5,10 @@
 
 namespace Arcade {
 
+	class Player;
+	class Alien;
+	class Bullet;
+
 	class SpaceInvadersGame : public Game {
 	public:
 		SpaceInvadersGame();
@@ -12,10 +16,14 @@ namespace Arcade {
 		virtual void Render() const override;
 		virtual void Update(JLHE::Timestep& ts) override;
 	public:
-		static bool s_ChangeDirections;         
+		static bool s_ChangeDirections;
 	private:
-		//why do I need mutable?
+		void DetectCollisions();
+	private:
 		mutable JLHE::EntitySystem m_EntitySystem;
+		Player* m_Player;
+		std::vector<Alien*> m_Aliens;
+		std::vector<Bullet*> m_Bullets;
 	};
 
 }

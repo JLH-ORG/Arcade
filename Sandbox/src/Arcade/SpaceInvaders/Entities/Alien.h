@@ -10,6 +10,7 @@ namespace Arcade {
 		void Die();
 	public:
 		static bool s_MovingRight;
+		static bool s_MoveDown;
 	private:
 		static float s_Bound;
 
