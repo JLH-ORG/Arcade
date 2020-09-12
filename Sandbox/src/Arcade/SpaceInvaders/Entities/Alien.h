@@ -7,7 +7,11 @@ namespace Arcade {
 		Alien(glm::vec3 position, glm::vec2 size, float speed);
 
 		virtual void OnUpdate(JLHE::Timestep& ts) override;
+
 		void Die();
+		
+		bool IsHit();
+		bool IsDead();
 	public:
 		static bool s_MovingRight;
 		static bool s_MoveDown;
@@ -15,9 +19,10 @@ namespace Arcade {
 		static float s_Bound;
 
 		float m_Speed;
-		bool m_IsDead;
+		bool m_IsHit;
+		float m_Countdown;
 	private:
-		bool IsHit();
+
 	};
 
 

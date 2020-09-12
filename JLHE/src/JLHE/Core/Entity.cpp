@@ -28,4 +28,5 @@ namespace JLHE {
 				Renderer2D::DrawRotatedQuad(m_Position, m_Size, m_Rotation, { 1, 1, 1, 1 });
 		}
 	}
+
 }

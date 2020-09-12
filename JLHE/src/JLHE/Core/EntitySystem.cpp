@@ -38,4 +38,17 @@ namespace JLHE {
 		}
 		return false;
 	}
+
+	bool EntitySystem::RemoveEntity(Entity* entity) {
+		int offset = 0;
+		for (auto& element : m_Entities) {
+			if (element == entity) {
+				m_Entities.erase(m_Entities.begin() + offset);
+				return true;
+			}
+			offset++;
+		}
+		return false;
+	}
+
 }

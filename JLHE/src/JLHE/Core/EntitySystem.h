@@ -16,8 +16,10 @@ namespace JLHE {
 		void OnRender();
 
 		bool AddEntity(Entity* entity);
+		bool RemoveEntity(Entity* entity);
 	private:
 		std::vector<Entity*> m_Entities;
 		static const uint32_t s_MaxEntities = 100;
 	};
+
 }

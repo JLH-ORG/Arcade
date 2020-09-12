@@ -16,6 +16,6 @@ namespace Arcade {
 		JLHE::EntitySystem& m_OccupiedEntitySystem;
 		std::vector<Bullet*>& m_Bullets;
 		float m_Speed;
-		JLHE::Timestep m_FireCooldown;
+		float m_FireCooldown;
 	};
 }

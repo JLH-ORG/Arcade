@@ -11,6 +11,8 @@ namespace Arcade {
 		void Hit();
 	private:
 		float m_Velocity;
+		bool m_Collided;
+		float m_Timeout;
 	};
 
 }

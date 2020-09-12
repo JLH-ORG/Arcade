@@ -12,7 +12,7 @@ namespace Arcade {
 		for (float i = -5; i < 5; i++) {
 			for (float j = 0; j < 5; j++) {
 				Alien* e = new Alien({ i / 10 , j / 10 , 0 }, { 1.0f / 11.0f, 1.0f / 11.0f }, 0.5f);
-				m_EntitySystem.AddEntity(e);
+				m_EntitySystem.AddEntity(e) ? JLHE_TRACE("Added alien entity.") : JLHE_ERROR("Could not add alien entity.");
 				m_Aliens.push_back(e);
 			}
 		}
@@ -27,6 +27,7 @@ namespace Arcade {
 		Alien::s_MoveDown = false;
 		if (SpaceInvadersGame::s_ChangeDirections) { Alien::s_MovingRight = !Alien::s_MovingRight; Alien::s_MoveDown = true; s_ChangeDirections = false; }
 		DetectCollisions();
+
 	}
 
 	void SpaceInvadersGame::Render() const {
@@ -34,12 +35,11 @@ namespace Arcade {
 	}
 
 	void SpaceInvadersGame::DetectCollisions() {
+
 		for (auto& alien : m_Aliens) {
 			for (auto& bullet : m_Bullets) {
-				glm::vec3 alienPos = alien->GetPosition();
-				glm::vec2 alienSize = alien->GetSize();
-				glm::vec3 bulletPos = bullet->GetPosition();
-				glm::vec2 bulletSize = bullet->GetSize();
+				glm::vec3 alienPos = alien->GetPosition(); glm::vec2 alienSize = alien->GetSize();
+				glm::vec3 bulletPos = bullet->GetPosition(); glm::vec2 bulletSize = bullet->GetSize();
 
 				bool hit = false;
 
@@ -58,6 +58,16 @@ namespace Arcade {
 				
 			}
 		}
+
+	}
+
+	void SpaceInvadersGame::RemoveDead() {
+		for (auto& alien : m_Aliens) {
+			if (alien->IsDead()) {
+				m_EntitySystem.RemoveEntity(alien);
+			}
+		}
+
 	}
 
 }

@@ -19,6 +19,7 @@ namespace Arcade {
 		static bool s_ChangeDirections;
 	private:
 		void DetectCollisions();
+		void RemoveDead();
 	private:
 		mutable JLHE::EntitySystem m_EntitySystem;
 		Player* m_Player;

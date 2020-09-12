@@ -10,12 +10,16 @@ namespace Arcade {
 	float Alien::s_Bound = 1.75f;
 
 	Alien::Alien(glm::vec3 position, glm::vec2 size, float speed) 
-		: JLHE::Entity(position, size, 0), m_Speed(speed), m_IsDead(false) {}
+		: JLHE::Entity(position, size, 0), m_Speed(speed), m_IsHit(false) {}
 
 	void Alien::OnUpdate(JLHE::Timestep& ts) {
-		if (s_MoveDown) {
-			m_Position.y -= 0.05f;
+
+		if (m_IsHit) {
+			m_Countdown -= ts;
 		}
+
+		if (s_MoveDown) { m_Position.y -= 0.05f; }
+
 		if (Alien::s_MovingRight) {
 			m_Position.x += ts * m_Speed;
 			if (m_Position.x > Alien::s_Bound) { SpaceInvadersGame::s_ChangeDirections = true; }
@@ -24,16 +28,21 @@ namespace Arcade {
 			m_Position.x -= ts * m_Speed;
 			if (m_Position.x < -Alien::s_Bound) { SpaceInvadersGame::s_ChangeDirections = true; }
 		}
+
 	}
 
 	void Alien::Die() {
-		m_IsDead = true;
-		Hide();
+		m_IsHit = true;
+		m_Countdown = 0.8f;
+		// Change the texture to dead texture here.
 	}
 
 	bool Alien::IsHit() {
-		return false;
+		return this->m_IsHit;
 	}
 
+	bool Alien::IsDead() {
+		return this->m_IsHit && m_Countdown < 0;
+	}
 
 }
