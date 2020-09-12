@@ -10,7 +10,7 @@ namespace Arcade {
 	float Alien::s_Bound = 1.75f;
 
 	Alien::Alien(glm::vec3 position, glm::vec2 size, float speed) 
-		: JLHE::Entity(position, size, 0), m_Speed(speed), m_IsHit(false) {}
+		: JLHE::Entity(position, size, 0), m_Speed(speed), m_IsHit(false), m_Countdown(0.8f) {}
 
 	void Alien::OnUpdate(JLHE::Timestep& ts) {
 
@@ -31,9 +31,8 @@ namespace Arcade {
 
 	}
 
-	void Alien::Die() {
+	void Alien::Hit() {
 		m_IsHit = true;
-		m_Countdown = 0.8f;
 		// Change the texture to dead texture here.
 	}
 

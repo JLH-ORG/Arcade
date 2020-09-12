@@ -8,7 +8,7 @@ namespace Arcade {
 
 		virtual void OnUpdate(JLHE::Timestep& ts) override;
 
-		void Die();
+		void Hit();
 		
 		bool IsHit();
 		bool IsDead();

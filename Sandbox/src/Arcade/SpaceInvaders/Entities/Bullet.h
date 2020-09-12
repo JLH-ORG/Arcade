@@ -8,11 +8,15 @@ namespace Arcade {
 		Bullet(glm::vec3 position, glm::vec2 size, float velocity);
 		
 		virtual void OnUpdate(JLHE::Timestep& ts) override;
+
 		void Hit();
+
+		bool IsHit();
+		bool IsDead();
 	private:
 		float m_Velocity;
 		bool m_Collided;
-		float m_Timeout;
+		float m_Countdown;
 	};
 
 }
