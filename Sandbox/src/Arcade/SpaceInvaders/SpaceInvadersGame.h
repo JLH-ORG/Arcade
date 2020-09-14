@@ -24,7 +24,8 @@ namespace Arcade {
 		mutable JLHE::EntitySystem m_EntitySystem;
 		Player* m_Player;
 		std::vector<Alien*> m_Aliens;
-		std::vector<Bullet*> m_Bullets;
+		std::vector<Bullet*> m_PlayerBullets;
+		std::vector<Bullet*> m_AlienBullets;
 	};
 
 }

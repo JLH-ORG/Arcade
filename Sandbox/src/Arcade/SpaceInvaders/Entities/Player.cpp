@@ -24,7 +24,7 @@ namespace Arcade {
 			Bullet* b = new Bullet({ this->m_Position.x, this->m_Position.y, 0 }, { 0.07f, 0.07f }, 0.5f);
 			m_OccupiedEntitySystem.AddEntity(b);
 			m_Bullets.push_back(b);
-			m_FireCooldown = 5;
+			m_FireCooldown = 1;
 			JLHE_INFO("Fired");
 		}
 	}
