@@ -96,23 +96,38 @@ namespace Arcade {
 				m_AlienBullets[i]->Hit();
 				// Game should end here
 			}
+
+
 		}
+		
 	}
 
 
 	void SpaceInvadersGame::RemoveDead() {
+
 		for (int i = 0; i < m_Aliens.size(); i++) {
 			if (m_Aliens[i]->IsDead()) {
-				if (i + 1 < m_Aliens.size() && m_Aliens[i]) 
+				if (i + 1 < m_Aliens.size() && m_Aliens[i]->CanFire()) 
 					m_Aliens[i + 1]->SetCanFire();
 				m_EntitySystem.RemoveEntity(m_Aliens[i]);
 				m_Aliens.erase(m_Aliens.begin() + i);
+				i--;
 			}
 		}
+
 		for (int i = 0; i < m_PlayerBullets.size(); i++) {
 			if (m_PlayerBullets[i]->IsDead()) {
 				m_EntitySystem.RemoveEntity(m_PlayerBullets[i]);
 				m_PlayerBullets.erase(m_PlayerBullets.begin() + i);
+				i--;
+			}	
+		}
+
+		for (int i = 0; i < m_AlienBullets.size(); i++) {
+			if (m_AlienBullets[i]->IsDead()) {
+				m_EntitySystem.RemoveEntity(m_AlienBullets[i]);
+				m_AlienBullets.erase(m_AlienBullets.begin() + i);
+				i--;
 			}
 		}
 	

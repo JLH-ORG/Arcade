@@ -5,7 +5,7 @@
 namespace Arcade {
 
 	Bullet::Bullet(glm::vec3 position, glm::vec2 size, float velocity) 
-		: JLHE::Entity(position, size, 0), m_Velocity(velocity), m_Collided(false), m_Countdown(0.5f) {}
+		: JLHE::Entity(position, size, 0), m_Velocity(velocity), m_Collided(false), m_Countdown(0.0f) {}
 
 	void Bullet::OnUpdate(JLHE::Timestep& ts) {
 		if (!this->m_Collided) { 
@@ -16,7 +16,7 @@ namespace Arcade {
 	}
 
 	void Bullet::Hit() {
-		this->m_Collided = true;
+		m_Collided = true;
 		// should change texture here
 	}
 
@@ -25,7 +25,7 @@ namespace Arcade {
 	}
 
 	bool Bullet::IsDead() {
-		return m_Collided && (m_Countdown < 0);
+		return m_Collided && (m_Countdown <= 0);
 	}
 
 }

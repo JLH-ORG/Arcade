@@ -11,20 +11,20 @@ namespace Arcade {
 		m_FireCooldown -= ts;
 		if (JLHE::Input::IsKeyPressed(JLHE_KEY_A))
 			m_Position.x -= m_Speed * ts;
-		else if (JLHE::Input::IsKeyPressed(JLHE_KEY_D))
+		if (JLHE::Input::IsKeyPressed(JLHE_KEY_D))
 			m_Position.x += m_Speed * ts;
 		if (JLHE::Input::IsKeyPressed(JLHE_KEY_SPACE))
 			Fire();
+		else
+			m_FireCooldown = 0;
 	}
 
 	void Player::Fire() {
-		if (m_FireCooldown > 0) {
-			JLHE_INFO("Cannot fire when on cooldown!");
-		} else {
+		if (m_FireCooldown < 0) {
 			Bullet* b = new Bullet({ this->m_Position.x, this->m_Position.y, 0 }, { 0.07f, 0.07f }, 0.5f);
 			m_OccupiedEntitySystem.AddEntity(b);
 			m_Bullets.push_back(b);
-			m_FireCooldown = 1;
+			m_FireCooldown = 1.0f;
 			JLHE_INFO("Fired");
 		}
 	}
