@@ -8,6 +8,7 @@ namespace Arcade {
 	class Player;
 	class Alien;
 	class Bullet;
+	class Barrier;
 
 	class SpaceInvadersGame : public Game {
 	public:
@@ -26,6 +27,7 @@ namespace Arcade {
 		std::vector<Alien*> m_Aliens;
 		std::vector<Bullet*> m_PlayerBullets;
 		std::vector<Bullet*> m_AlienBullets;
+		std::vector<Barrier*> m_Barriers;
 	};
 
 }

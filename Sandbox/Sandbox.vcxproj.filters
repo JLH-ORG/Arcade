@@ -27,6 +27,9 @@
     <ClInclude Include="src\GameLayer.h" />
     <ClInclude Include="src\Arcade\SpaceInvaders\Entities\Alien.h" />
     <ClInclude Include="src\Arcade\SpaceInvaders\Entities\Bullet.h" />
+    <ClInclude Include="src\Arcade\SpaceInvaders\Entities\Barrier.h">
+      <Filter>Arcade\SpaceInvaders\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Arcade\Game.cpp">
@@ -42,5 +45,8 @@
     <ClCompile Include="src\SandboxApp.cpp" />
     <ClCompile Include="src\Arcade\SpaceInvaders\Entities\Alien.cpp" />
     <ClCompile Include="src\Arcade\SpaceInvaders\Entities\Bullet.cpp" />
+    <ClCompile Include="src\Arcade\SpaceInvaders\Entities\Barrier.cpp">
+      <Filter>Arcade\SpaceInvaders\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

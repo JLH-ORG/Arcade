@@ -28,5 +28,4 @@ namespace Arcade {
 			JLHE_INFO("Fired");
 		}
 	}
-
 }

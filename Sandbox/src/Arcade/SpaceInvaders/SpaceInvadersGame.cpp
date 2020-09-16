@@ -3,10 +3,12 @@
 #include "Entities/Player.h"
 #include "Entities/Alien.h"
 #include "Entities/Bullet.h"
+#include "Entities/Barrier.h"
 
 namespace Arcade {
 
 	bool SpaceInvadersGame::s_ChangeDirections = false;
+	bool IsCollision(JLHE::Entity e1, JLHE::Entity e2);
 	
 	SpaceInvadersGame::SpaceInvadersGame() {
 		for (float i = -5; i < 5; i++) {
@@ -14,23 +16,27 @@ namespace Arcade {
 				bool canFire = false;
 				if (j == 0)
 					canFire = true;
-				Alien* e = new Alien({ i / 10 , j / 10 , 0 }, { 1.0f / 11.0f, 1.0f / 11.0f }, 0.5f, canFire, m_EntitySystem, m_AlienBullets);
+				Alien* e = new Alien({ i / 10 , 0.5f + j / 10 , 0 }, { 1.0f / 11.0f, 1.0f / 11.0f }, 0.5f, canFire, m_EntitySystem, m_AlienBullets);
 				m_EntitySystem.AddEntity(e) ? JLHE_TRACE("Added alien entity.") : JLHE_ERROR("Could not add alien entity.");
 				m_Aliens.push_back(e);
 			}
 		}
-		Player* p = new Player({ 0, -0.5f, 0 }, {0.1f , 0.1f }, 1, m_EntitySystem, m_PlayerBullets);
+		for (float i = -1.5; i < 2; i++) {
+			Barrier* b = new Barrier({ i, -0.5, 0 }, { 0.2f, 0.2f });
+			m_EntitySystem.AddEntity(b);
+			m_Barriers.push_back(b);
+		}
+		Player* p = new Player({ 0, -0.9f, 0 }, {0.1f , 0.1f }, 1, m_EntitySystem, m_PlayerBullets);
 		m_Player = p;
 		m_EntitySystem.AddEntity(p);
-
 	}
 
 	void SpaceInvadersGame::Update(JLHE::Timestep& ts) {
 		m_EntitySystem.OnUpdate(ts);
 		Alien::s_MoveDown = false;
 		if (SpaceInvadersGame::s_ChangeDirections) { Alien::s_MovingRight = !Alien::s_MovingRight; Alien::s_MoveDown = true; s_ChangeDirections = false; }
-		DetectCollisions();
 		RemoveDead();
+		DetectCollisions();
 	}
 
 	void SpaceInvadersGame::Render() const {
@@ -39,72 +45,55 @@ namespace Arcade {
 
 	void SpaceInvadersGame::DetectCollisions() {
 
+		// Check for alien-player_bullet collisions 
 		for (int i = 0; i < m_Aliens.size(); i++) {
 			for (int j = 0; j < m_PlayerBullets.size(); j++) {
 				// check for entities hit but not dead
 				if (!m_Aliens[i]->IsHit() && !m_PlayerBullets[j]->IsHit()) {
-					glm::vec3 alienPos = m_Aliens[i]->GetPosition(); glm::vec2 alienSize = m_Aliens[i]->GetSize();
-					glm::vec3 bulletPos = m_PlayerBullets[j]->GetPosition(); glm::vec2 bulletSize = m_PlayerBullets[j]->GetSize();
-		
-					bool hit = false;
-				
-					if ((alienPos.x - alienSize.x / 2 < bulletPos.x + bulletSize.x / 2) && (bulletPos.x + bulletSize.x / 2 < alienPos.x + alienSize.x / 2) && (alienPos.y - alienSize.y / 2 < bulletPos.y + bulletSize.y / 2) && (bulletPos.y + bulletSize.y / 2 < alienPos.y + alienSize.y / 2))
-						hit = true;
-					else if ((alienPos.x - alienSize.x / 2 < bulletPos.x - bulletSize.x / 2) && (bulletPos.x - bulletSize.x / 2 < alienPos.x + alienSize.x / 2) && (alienPos.y - alienSize.y / 2 < bulletPos.y + bulletSize.y / 2) && (bulletPos.y + bulletSize.y / 2 < alienPos.y + alienSize.y / 2))
-						hit = true;
-					else if ((alienPos.x - alienSize.x / 2 < bulletPos.x + bulletSize.x / 2) && (bulletPos.x + bulletSize.x / 2 < alienPos.x + alienSize.x / 2) && (alienPos.y - alienSize.y / 2 < bulletPos.y - bulletSize.y / 2) && (bulletPos.y - bulletSize.y / 2 < alienPos.y + alienSize.y / 2))
-						hit = true;
-					else if ((alienPos.x - alienSize.x / 2 < bulletPos.x - bulletSize.x / 2) && (bulletPos.x - bulletSize.x / 2 < alienPos.x + alienSize.x / 2) && (alienPos.y - alienSize.y / 2 < bulletPos.y - bulletSize.y / 2) && (bulletPos.y - bulletSize.y / 2 < alienPos.y + alienSize.y / 2))
-						hit = true;
-					if (hit) {
+					if (IsCollision(*m_Aliens[i], *m_PlayerBullets[j])) {
 						m_Aliens[i]->Hit();
 						m_PlayerBullets[j]->Hit();
 					}
 				}
 			}
 		}
-
+		// Check for alien_bullet collisions
 		for (int i = 0; i < m_AlienBullets.size(); i++) {
-			glm::vec3 alienBulletPos = m_AlienBullets[i]->GetPosition(); glm::vec2 alienSize  = m_AlienBullets[i]->GetSize();
-			bool hit = false;
+			// With player_bullets
 			for (int j = 0; j < m_PlayerBullets.size(); j++) {
-				glm::vec3 playerBulletPos = m_PlayerBullets[j]->GetPosition(); glm::vec2 playerBulletSize = m_PlayerBullets[j]->GetSize();
-
-				if ((playerBulletPos.x - playerBulletSize.x / 2 < alienBulletPos.x + alienSize.x / 2) && (alienBulletPos.x + alienSize.x / 2 < playerBulletPos.x + playerBulletSize.x / 2) && (playerBulletPos.y - playerBulletSize.y / 2 < alienBulletPos.y + alienSize.y / 2) && (alienBulletPos.y + alienSize.y / 2 < playerBulletPos.y + playerBulletSize.y / 2))
-					hit = true;
-				else if ((playerBulletPos.x - playerBulletSize.x / 2 < alienBulletPos.x - alienSize.x / 2) && (alienBulletPos.x - alienSize.x / 2 < playerBulletPos.x + playerBulletSize.x / 2) && (playerBulletPos.y - playerBulletSize.y / 2 < alienBulletPos.y + alienSize.y / 2) && (alienBulletPos.y + alienSize.y / 2 < playerBulletPos.y + playerBulletSize.y / 2))
-					hit = true;
-				else if ((playerBulletPos.x - playerBulletSize.x / 2 < alienBulletPos.x + alienSize.x / 2) && (alienBulletPos.x + alienSize.x / 2 < playerBulletPos.x + playerBulletSize.x / 2) && (playerBulletPos.y - playerBulletSize.y / 2 < alienBulletPos.y - alienSize.y / 2) && (alienBulletPos.y - alienSize.y / 2 < playerBulletPos.y + playerBulletSize.y / 2))
-					hit = true;
-				else if ((playerBulletPos.x - playerBulletSize.x / 2 < alienBulletPos.x - alienSize.x / 2) && (alienBulletPos.x - alienSize.x / 2 < playerBulletPos.x + playerBulletSize.x / 2) && (playerBulletPos.y - playerBulletSize.y / 2 < alienBulletPos.y - alienSize.y / 2) && (alienBulletPos.y - alienSize.y / 2 < playerBulletPos.y + playerBulletSize.y / 2))
-					hit = true;
-				if (hit) {
-					m_AlienBullets[i]->Hit();
-					m_PlayerBullets[j]->Hit();
+				if (!m_AlienBullets[i]->IsHit() && !m_PlayerBullets[j]->IsHit()) {
+					if (IsCollision(*m_AlienBullets[i], *m_PlayerBullets[j])) {
+						m_AlienBullets[i]->Hit();
+						m_PlayerBullets[j]->Hit();
+					}
 				}
-			}
-			glm::vec3 playerPos = m_Player->GetPosition(); glm::vec2 playerSize = m_Player->GetSize();
-			if ((playerPos.x - playerSize.x / 2 < alienBulletPos.x + alienSize.x / 2) && (alienBulletPos.x + alienSize.x / 2 < playerPos.x + playerSize.x / 2) && (playerPos.y - playerSize.y / 2 < alienBulletPos.y + alienSize.y / 2) && (alienBulletPos.y + alienSize.y / 2 < playerPos.y + playerSize.y / 2))
-				hit = true;
-			else if ((playerPos.x - playerSize.x / 2 < alienBulletPos.x - alienSize.x / 2) && (alienBulletPos.x - alienSize.x / 2 < playerPos.x + playerSize.x / 2) && (playerPos.y - playerSize.y / 2 < alienBulletPos.y + alienSize.y / 2) && (alienBulletPos.y + alienSize.y / 2 < playerPos.y + playerSize.y / 2))
-				hit = true;
-			else if ((playerPos.x - playerSize.x / 2 < alienBulletPos.x + alienSize.x / 2) && (alienBulletPos.x + alienSize.x / 2 < playerPos.x + playerSize.x / 2) && (playerPos.y - playerSize.y / 2 < alienBulletPos.y - alienSize.y / 2) && (alienBulletPos.y - alienSize.y / 2 < playerPos.y + playerSize.y / 2))
-				hit = true;
-			else if ((playerPos.x - playerSize.x / 2 < alienBulletPos.x - alienSize.x / 2) && (alienBulletPos.x - alienSize.x / 2 < playerPos.x + playerSize.x / 2) && (playerPos.y - playerSize.y / 2 < alienBulletPos.y - alienSize.y / 2) && (alienBulletPos.y - alienSize.y / 2 < playerPos.y + playerSize.y / 2))
-				hit = true;
-			if (hit) {
+			}		
+			// With the player
+			if (IsCollision(*m_AlienBullets[i], *m_Player)) {
 				m_AlienBullets[i]->Hit();
 				// Game should end here
 			}
-
-
 		}
-		
+		// Check for barrier collisions
+		for (int i = 0; i < m_Barriers.size(); i++) {
+			// With Alien_bullets
+			for (int j = 0; j < m_AlienBullets.size(); j++) {
+				if (IsCollision(*m_Barriers[i], *m_AlienBullets[j])) {
+					m_Barriers[i]->Hit();
+					m_AlienBullets[j]->Hit();
+				}
+			}
+			// With player_bullets
+			for (int j = 0; j < m_PlayerBullets.size(); j++) {
+				if (IsCollision(*m_Barriers[i], *m_PlayerBullets[j])) {
+					m_Barriers[i]->Hit();
+					m_PlayerBullets[j]->Hit();
+				}
+			}
+		}
 	}
 
-
 	void SpaceInvadersGame::RemoveDead() {
-
 		for (int i = 0; i < m_Aliens.size(); i++) {
 			if (m_Aliens[i]->IsDead()) {
 				if (i + 1 < m_Aliens.size() && m_Aliens[i]->CanFire()) 
@@ -131,6 +120,22 @@ namespace Arcade {
 			}
 		}
 	
+	}
+
+	static bool IsCollision(JLHE::Entity e1, JLHE::Entity e2) {
+		glm::vec3 e1Position = e1.GetPosition(); glm::vec2 e1Size = e1.GetSize();
+		glm::vec3 e2Position = e2.GetPosition(); glm::vec2 e2Size = e2.GetSize();
+
+		if ((e1Position.x - e1Size.x / 2 < e2Position.x + e2Size.x / 2) && (e2Position.x + e2Size.x / 2 < e1Position.x + e1Size.x / 2) && (e1Position.y - e1Size.y / 2 < e2Position.y + e2Size.y / 2) && (e2Position.y + e2Size.y / 2 < e1Position.y + e1Size.y / 2))
+			return true;
+		else if ((e1Position.x - e1Size.x / 2 < e2Position.x - e2Size.x / 2) && (e2Position.x - e2Size.x / 2 < e1Position.x + e1Size.x / 2) && (e1Position.y - e1Size.y / 2 < e2Position.y + e2Size.y / 2) && (e2Position.y + e2Size.y / 2 < e1Position.y + e1Size.y / 2))
+			return true;
+		else if ((e1Position.x - e1Size.x / 2 < e2Position.x + e2Size.x / 2) && (e2Position.x + e2Size.x / 2 < e1Position.x + e1Size.x / 2) && (e1Position.y - e1Size.y / 2 < e2Position.y - e2Size.y / 2) && (e2Position.y - e2Size.y / 2 < e1Position.y + e1Size.y / 2))
+			return true;
+		else if ((e1Position.x - e1Size.x / 2 < e2Position.x - e2Size.x / 2) && (e2Position.x - e2Size.x / 2 < e1Position.x + e1Size.x / 2) && (e1Position.y - e1Size.y / 2 < e2Position.y - e2Size.y / 2) && (e2Position.y - e2Size.y / 2 < e1Position.y + e1Size.y / 2))
+			return true;
+		else
+			return false;
 	}
 
 }
